@@ -67,26 +67,30 @@ The app includes:
    Your configuration JSON should include:
    ```json
    {
-     "config": {
-       "primary_network": "admob",
-       "fallback_network": "applovin"
-     },
-     "admob": {
-       "banner_id": "ca-app-pub-xxx/xxx",
-       "interstitial_id": "ca-app-pub-xxx/xxx",
-       "rewarded_id": "ca-app-pub-xxx/xxx",
-       "native_id": "ca-app-pub-xxx/xxx",
-       "open_id": "ca-app-pub-xxx/xxx"
-     },
-     "applovin": {
-       "sdk_key": "YOUR_SDK_KEY",
-       "banner_id": "YOUR_BANNER_ID",
-       "interstitial_id": "YOUR_INTERSTITIAL_ID",
-       "rewarded_id": "YOUR_REWARDED_ID",
-       "native_id": "YOUR_NATIVE_ID",
-       "open_id": "YOUR_OPEN_ID"
-     }
-   }
+  "ads": {
+    "admob": {
+      "openAdsIds": "ca-app-pub-3940256099942544/9257395921",
+      "bannerIds": ["ca-app-pub-3940256099942544/9214589741"],
+      "interIds": ["ca-app-pub-3940256099942544/1033173712"],
+      "nativeIds": ["ca-app-pub-3940256099942544/2247696110"],
+      "rewardIds": ["ca-app-pub-6503755592272111/5763890191"]
+    },
+    "applovin": {
+        "sdk_key": "",
+        "bannerId": "",
+        "openAdsIds":"60bcaa3bee8f034b",
+        "interId": "40a9b25969e5e629",
+        "nativeId": "43e21bcddec13181",
+        "rewardId": "42fda58804fc7b6c"
+    },
+    "settings": {
+      "openads": "admob",
+      "banners": "admob",
+      "inters": "admob",
+      "nativees": "admob",
+      "rewards": "admob"
+    }
+  }
    ```
 
 ## 🏗️ Project Structure
@@ -126,7 +130,10 @@ lib/
 2. **Show different ad types**:
    ```dart
    // Banner Ad
-   CustomBanner(ads: gAds.bannerInstance)
+    CustomBanner(
+      key: const ValueKey('banner_ad'),
+      ads: gAds.bannerInstance,
+      )
    
    // Interstitial Ad
    gAds.interInstance.showInterstitialAd();
@@ -138,9 +145,10 @@ lib/
    
    // Native Ad
    CustomNative(
-     ads: gAds.nativeInstance,
-     templateType: TemplateType.medium,
-   )
+      key: const ValueKey('native_ad'),
+      ads: gAds.nativeInstance,
+      templateType: TemplateType.medium,
+    )
    
    // Open Ad
    gAds.openAdsInstance.showAdIfAvailableOpenAds();
@@ -168,20 +176,6 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
-## 🔧 Configuration
-
-### Ad Network Priority
-
-The app supports fallback between ad networks. Configure the primary and fallback networks in your JSON configuration:
-
-```json
-{
-  "config": {
-    "primary_network": "admob",
-    "fallback_network": "applovin"
-  }
-}
-```
 
 ### Ad Unit IDs
 
@@ -192,15 +186,6 @@ Each ad network requires specific ad unit IDs. Make sure to:
 3. Ensure ad unit IDs match the correct ad format
 
 ## 🚀 Building for Production
-
-### Android
-
-1. Update `android/app/build.gradle` with your signing configuration
-2. Replace test ad unit IDs with production IDs
-3. Build the APK:
-   ```bash
-   flutter build apk --release
-   ```
 
 ### iOS
 
@@ -217,7 +202,6 @@ Each ad network requires specific ad unit IDs. Make sure to:
 - `google_mobile_ads: ^6.0.0`: Google AdMob integration
 - `applovin_max: ^4.5.2`: AppLovin MAX integration
 - `http: ^1.5.0`: HTTP requests for configuration
-- `cupertino_icons: ^1.0.8`: iOS-style icons
 
 ## 🐛 Troubleshooting
 
