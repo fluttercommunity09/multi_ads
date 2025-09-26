@@ -67,54 +67,32 @@ The app includes:
    Your configuration JSON should include:
    ```json
    {
-  "ads": {
-    "admob": {
-      "openAdsIds": "ca-app-pub-3940256099942544/9257395921",
-      "bannerIds": ["ca-app-pub-3940256099942544/9214589741"],
-      "interIds": ["ca-app-pub-3940256099942544/1033173712"],
-      "nativeIds": ["ca-app-pub-3940256099942544/2247696110"],
-      "rewardIds": ["ca-app-pub-6503755592272111/5763890191"]
-    },
-    "applovin": {
-        "sdk_key": "",
-        "bannerId": "",
-        "openAdsIds":"60bcaa3bee8f034b",
-        "interId": "40a9b25969e5e629",
-        "nativeId": "43e21bcddec13181",
-        "rewardId": "42fda58804fc7b6c"
-    },
-    "settings": {
-      "openads": "admob",
-      "banners": "admob",
-      "inters": "admob",
-      "nativees": "admob",
-      "rewards": "admob"
-    }
-  }
+     "ads": {
+       "admob": {
+         "openAdsIds": "ca-app-pub-3940256099942544/9257395921",
+         "bannerIds": ["ca-app-pub-3940256099942544/9214589741"],
+         "interIds": ["ca-app-pub-3940256099942544/1033173712"],
+         "nativeIds": ["ca-app-pub-3940256099942544/2247696110"],
+         "rewardIds": ["ca-app-pub-6503755592272111/5763890191"]
+       },
+       "applovin": {
+         "sdk_key": "",
+         "bannerId": "",
+         "openAdsIds": "60bcaa3bee8f034b",
+         "interId": "40a9b25969e5e629",
+         "nativeId": "43e21bcddec13181",
+         "rewardId": "42fda58804fc7b6c"
+       },
+       "settings": {
+         "openads": "admob",
+         "banners": "admob",
+         "inters": "admob",
+         "natives": "admob",
+         "rewards": "admob"
+       }
+     }
+   }
    ```
-
-## 🏗️ Project Structure
-
-```
-lib/
-├── ads/                          # Ad network integration
-│   ├── multi_ads.dart           # Main ads export file
-│   ├── networks.dart            # Network constants
-│   └── src/
-│       ├── data/                # Ad configuration data
-│       ├── globals/             # Global variables
-│       ├── networks/            # Network-specific implementations
-│       ├── utils/               # Utility functions
-│       ├── widgets/             # Custom ad widgets
-│       └── multi_ads_factory.dart
-├── const.dart                   # App constants and global variables
-├── main.dart                    # App entry point
-├── screen/                      # App screens
-│   ├── loading.dart            # Loading/configuration screen
-│   └── start.dart              # Main demo screen
-└── service/
-    └── app_lifecycle_observer.dart  # App lifecycle management
-```
 
 ## 🎯 Usage
 
@@ -130,10 +108,10 @@ lib/
 2. **Show different ad types**:
    ```dart
    // Banner Ad
-    CustomBanner(
-      key: const ValueKey('banner_ad'),
-      ads: gAds.bannerInstance,
-      )
+   CustomBanner(
+     key: const ValueKey('banner_ad'),
+     ads: gAds.bannerInstance,
+   )
    
    // Interstitial Ad
    gAds.interInstance.showInterstitialAd();
@@ -145,10 +123,10 @@ lib/
    
    // Native Ad
    CustomNative(
-      key: const ValueKey('native_ad'),
-      ads: gAds.nativeInstance,
-      templateType: TemplateType.medium,
-    )
+     key: const ValueKey('native_ad'),
+     ads: gAds.nativeInstance,
+     templateType: TemplateType.medium,
+   )
    
    // Open Ad
    gAds.openAdsInstance.showAdIfAvailableOpenAds();
@@ -226,6 +204,11 @@ Each ad network requires specific ad unit IDs. Make sure to:
 ### Debug Mode
 
 Enable debug logging by checking the console output. The app includes comprehensive logging for ad events and errors.
+
+4. **Open Ads not showing**:
+   - Ensure you call `loadAppOpenAd()` before `showAdIfAvailableOpenAds()`
+   - Wait for the ad to load before attempting to show it
+   - Check that the app is in the foreground when showing open ads
 
 ## 📄 License
 
