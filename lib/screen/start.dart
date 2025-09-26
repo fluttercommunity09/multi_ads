@@ -17,8 +17,8 @@ class _StartState extends State<Start> {
   @override
   void initState() {
     super.initState();
-    // wait 500 ms
-    Future.delayed(const Duration(milliseconds: 500), () {
+    // wait 2 seconds
+    Future.delayed(const Duration(seconds: 1), () {
       gAds.openAdsInstance.showAdIfAvailableOpenAds();
     });
   }

@@ -32,7 +32,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         gAds = MultiAds(response.body);
         await gAds.init();
         await gAds.loadAds();
-        configApp = data2['config'];
+
         isInterShowed = false;
         Navigator.pushReplacement(
           context,

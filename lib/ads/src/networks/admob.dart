@@ -82,7 +82,7 @@ class AdmobAD extends Ads {
           _appOpenAd = ad;
         },
         onAdFailedToLoad: (error) {
-          print('AppOpenAd failed to load: $error');
+          _appOpenAd = null;
         },
       ),
       request: const AdRequest(),
@@ -99,14 +99,19 @@ class AdmobAD extends Ads {
     //   print('Tried to show ad while already showing an ad.');
     //   return;
     // }
+    print("------> Showing AppOpenAd ----------------");
     _appOpenAd!.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (ad) {},
+      onAdShowedFullScreenContent: (ad) {
+        print("------> AppOpenAd showed successfully ----------------");
+      },
       onAdFailedToShowFullScreenContent: (ad, error) {
+        print("------> AppOpenAd failed to show: $error ----------------");
         ad.dispose();
         _appOpenAd = null;
         loadAppOpenAd();
       },
       onAdDismissedFullScreenContent: (ad) {
+        print("------> AppOpenAd dismissed ----------------");
         ad.dispose();
         _appOpenAd = null;
         loadAppOpenAd();
